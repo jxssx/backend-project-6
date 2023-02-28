@@ -37,6 +37,7 @@
       "@fastify/sensible": "^5.1.0",
       "@fastify/static": "^6.5.0",
       "@fastify/view": "^7.1.0",
+      "@popperjs/core": "^2.11.6",
       "@vscode/sqlite3": "^5.0.8",
       "bootstrap": "^5.2.0",
       "fastify": "^4.10.2",

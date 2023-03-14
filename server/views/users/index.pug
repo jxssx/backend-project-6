@@ -1,6 +1,7 @@
 extends ../layouts/application.pug
 
 block content
+  h1.display-4.fw-bold.my-4= t('views.users.header')
   table.table.table-striped
     thead
       tr
@@ -13,3 +14,4 @@ block content
           td= user.id
           td= user.email
           td= formatDate(user.createdAt)
+

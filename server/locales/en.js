@@ -24,12 +24,25 @@ export default {
     layouts: {
       application: {
         users: 'Users',
+        statuses: 'Statuses',
         signIn: 'Login',
         signUp: 'Register',
         signOut: 'Logout',
       },
     },
     views: {
+      statuses: {
+        header: 'Statuses',
+        id: 'ID',
+        name: 'Name',
+        createdAt: 'Created at',
+        createStatus: 'Create Status',
+        new: {
+          header: 'Status Creation',
+          name: 'Name',
+          submit: 'Submit',
+        },
+      },
       session: {
         new: {
           signIn: 'Login',
@@ -37,6 +50,7 @@ export default {
         },
       },
       users: {
+        header: 'Users',
         id: 'ID',
         email: 'Email',
         createdAt: 'Created at',

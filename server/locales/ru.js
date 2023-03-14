@@ -24,12 +24,25 @@ export default {
     layouts: {
       application: {
         users: 'Пользователи',
+        statuses: 'Статусы',
         signIn: 'Вход',
         signUp: 'Регистрация',
         signOut: 'Выход',
       },
     },
     views: {
+      statuses: {
+        header: 'Статусы',
+        id: 'ID',
+        name: 'Наименование',
+        createdAt: 'Дата создания',
+        createStatus: 'Создать статус',
+        new: {
+          header: 'Создание статуса',
+          name: 'Наименование',
+          submit: 'Создать',
+        },
+      },
       session: {
         new: {
           signIn: 'Вход',
@@ -37,6 +50,7 @@ export default {
         },
       },
       users: {
+        header: 'Пользователи',
         id: 'ID',
         email: 'Email',
         createdAt: 'Дата создания',

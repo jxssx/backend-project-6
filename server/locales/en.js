@@ -4,6 +4,20 @@ export default {
   translation: {
     appName: 'Task Manager',
     flash: {
+      statuses: {
+        create: {
+          success: 'Status has been successfully created',
+          error: 'An error occured while trying to create the status',
+        },
+        edit: {
+          success: 'Status has been successfully edited',
+          error: 'An error occured while trying to edit the status',
+        },
+        delete: {
+          success: 'Status has been successfully deleted',
+          error: 'An error occured while trying to delete the status',
+        },
+      },
       session: {
         create: {
           success: 'You are logged in',
@@ -37,10 +51,17 @@ export default {
         name: 'Name',
         createdAt: 'Created at',
         createStatus: 'Create Status',
+        edit: 'Edit',
+        deleteStatus: 'Delete',
         new: {
           header: 'Status Creation',
           name: 'Name',
           submit: 'Submit',
+          edit: 'Edit',
+        },
+        editPage: {
+          header: 'Edit status',
+          submit: 'Submit'
         },
       },
       session: {

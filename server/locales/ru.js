@@ -4,6 +4,20 @@ export default {
   translation: {
     appName: 'Менеджер задач',
     flash: {
+      statuses: {
+        create: {
+          success: 'Статус успешно создан',
+          error: 'Ошибка при создании статуса',
+        },
+        edit: {
+          success: 'Статус успешно изменен',
+          error: 'Ошибка при изменении статуса',
+        },
+        delete: {
+          success: 'Статус успешно удален',
+          error: 'Возникла ошибка при попытке удалить статус',
+        },
+      },
       session: {
         create: {
           success: 'Вы залогинены',
@@ -37,10 +51,17 @@ export default {
         name: 'Наименование',
         createdAt: 'Дата создания',
         createStatus: 'Создать статус',
+        edit: 'Изменить',
+        deleteStatus: 'Удалить',
         new: {
           header: 'Создание статуса',
           name: 'Наименование',
           submit: 'Создать',
+          edit: 'Изменить',
+        },
+        editPage: {
+          header: 'Edit status',
+          submit: 'Изменить',
         },
       },
       session: {

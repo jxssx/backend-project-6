@@ -1,0 +1,8 @@
+extends ../layouts/application.pug
+
+block content
+  h1.display-4.fw-bold.mt-4= t('views.statuses.editPage.header')
+  +formFor()(action=`/statuses/${status.id}` method='post')
+    +floatingFormInput(createStatusForm, 'name', errors, 'Name')(type="text")
+    input(name="_method" type="hidden" value="patch")
+    +submit(status)(value=t('views.statuses.editPage.submit'))

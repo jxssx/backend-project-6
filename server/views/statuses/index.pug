@@ -3,7 +3,7 @@ extends ../layouts/application.pug
 block content
   h1.display-4.fw-bold.mt-4= t('views.statuses.header')
   a.btn.btn-primary(href='statuses/new')= t('views.statuses.createStatus')
-  table.table.table-striped.mt-5
+  table.table.table-borderless.table-striped.mt-5
     thead
       tr
         th= t('views.statuses.id')
@@ -15,3 +15,9 @@ block content
           td= status.id
           td= status.name
           td= formatDate(status.createdAt)
+          td
+            div.d-flex
+              a.btn.btn-primary.me-1(href=`/statuses/${status.id}/edit`)= t('views.statuses.edit')
+              form(action=`/statuses/${status.id}`, method='post')
+                input(name='_method', type='hidden', value='delete')
+                input(class='btn btn-danger' type='submit' value=t('views.statuses.deleteStatus'))

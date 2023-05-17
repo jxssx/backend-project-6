@@ -3,7 +3,5 @@ extends ../layouts/application.pug
 block content
   h1.display-4.fw-bold.mt-4= t('views.statuses.new.header')
   +formFor()(action=route('statuses') method='post')
-    div.form-floating.mb-3
-      input.form-control(id='data_name', type='text', name='data[name]', placeholder="Name")
-      label(for='data_name') Name
-    input.btn.btn-primary(type='submit', value='Submit')
+    +floatingFormInput(createStatusForm, 'name', errors, 'Name')(type="text")
+    +submit(createStatusForm)(value=t('views.statuses.new.submit'))

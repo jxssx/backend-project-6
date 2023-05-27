@@ -12,6 +12,20 @@
   "statuses": {
     "new": {
       "name": "soMething"
-    } 
+    },
+    "existing": {
+      "name": "123"
+    },
+    "delete": {
+      "name": "123"
+    },
+    "update": {
+      "from": {
+        "name": "edit me"
+      },
+      "to": {
+        "name": "edited"
+      }
+    }
   }
 }

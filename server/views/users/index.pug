@@ -2,15 +2,24 @@ extends ../layouts/application.pug
 
 block content
   h1.display-4.fw-bold.my-4= t('views.users.header')
-  table.table.table-striped
+  table.table.table-borderless.table-striped.mt-5
     thead
       tr
-        th= t('views.users.id')
-        th= t('views.users.email')
-        th= t('views.users.createdAt')
+        th= t('views.users.labels.id')
+        th= t('views.users.labels.name')
+        th= t('views.users.labels.email')
+        th= t('views.users.labels.createdAt')
+        th= t('views.users.labels.actions')
     tbody
       each user in users
         tr
           td= user.id
+          td= `${user.firstName} ${user.lastName}`
           td= user.email
           td= formatDate(user.createdAt)
+          td
+            div.d-flex
+              a.btn.btn-primary.me-1(href=`/users/${user.id}/edit`)= t('views.users.labels.edit')
+              form(action=`/users/${user.id}`, method='post')
+                input(name='_method', type='hidden', value='delete')
+                input(class='btn btn-danger' type='submit' value=t('views.users.labels.delete'))

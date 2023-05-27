@@ -1,0 +1,11 @@
+extends ../layouts/application.pug
+
+block content
+  h1.display-4.fw-bold.mt-4= t('views.users.editPage.header')
+  +formFor()(action=`/users/${user.id}` method='post')
+    +floatingFormInput(user, 'firstName', errors, t('views.users.labels.firstName'))(type="text")
+    +floatingFormInput(user, 'lastName', errors, t('views.users.labels.lastName'))(type="text")
+    +floatingFormInput(user, 'email', errors, t('views.users.labels.email'))(type="text")
+    +floatingFormInput(user, 'password', errors, t('views.users.labels.password'))(type="text")
+    input(name="_method" type="hidden" value="patch")
+    +submit(status)(value=t('views.users.labels.submitEdit'))

@@ -4,18 +4,33 @@ export default {
   translation: {
     appName: 'Менеджер задач',
     flash: {
+      tasks: {
+        create: {
+          success: 'Задача успешно создана',
+          error: 'Ошибка при создании задачи',
+        },
+        delete: {
+          success: 'Задача успешно удалена',
+          error: 'Возникла ошибка при попытке удалить статус',
+          noAccess: 'Задачу может удалить только ее автор',
+        },
+        update: {
+          success: 'Задача успешно изменена',
+          error: 'Ошибка при изменении задачи',
+        },
+      },
       statuses: {
         create: {
           success: 'Статус успешно создан',
           error: 'Ошибка при создании статуса',
         },
-        edit: {
+        update: {
           success: 'Статус успешно изменен',
           error: 'Ошибка при изменении статуса',
         },
         delete: {
           success: 'Статус успешно удален',
-          error: 'Возникла ошибка при попытке удалить статус',
+          error: 'Не удалось удалить статус',
         },
       },
       session: {
@@ -32,6 +47,18 @@ export default {
           error: 'Не удалось зарегистрировать',
           success: 'Пользователь успешно зарегистрирован',
         },
+        delete: {
+          error: 'Не удалось удалить пользователя',
+          success: 'Пользователь успешно удален',
+          noAccess: 'Вы не можете редактировать или удалять другого пользователя',
+        },
+        update: {
+          error: 'Не удалось изменить пользователя',
+          success: 'Пользователь был успешно изменен',
+        },
+        edit: {
+          noAcess: 'Вы не можете редактировать или удалять другого пользователя',
+        },
       },
       authError: 'Доступ запрещён! Пожалуйста, авторизируйтесь.',
     },
@@ -42,42 +69,81 @@ export default {
         signIn: 'Вход',
         signUp: 'Регистрация',
         signOut: 'Выход',
+        tasks: 'Задачи',
       },
     },
     views: {
-      statuses: {
-        header: 'Статусы',
-        id: 'ID',
-        name: 'Наименование',
-        createdAt: 'Дата создания',
-        createStatus: 'Создать статус',
-        edit: 'Изменить',
-        deleteStatus: 'Удалить',
+      tasks: {
+        header: 'Задачи',
         new: {
           header: 'Создание статуса',
+        },
+        labels: {
           name: 'Наименование',
-          submit: 'Создать',
-          edit: 'Изменить',
+          createTask: 'Создать задачу',
+          id: 'ID',
+          author: 'Автор',
+          status: 'Статус',
+          executor: 'Исполнитель',
+          createdAt: 'Дата создания',
+          submitEdit: 'Изменить',
+          delete: 'Удалить',
+          submitCreate: 'Создать',
+          description: 'Описание',
         },
         editPage: {
-          header: 'Edit status',
-          submit: 'Изменить',
+          header: 'Изменить задачу',
+        },
+      },
+      statuses: {
+        header: 'Статусы',
+        edit: 'Изменить',
+        labels: {
+          id: 'ID',
+          name: 'Наименование',
+          createdAt: 'Дата создания',
+          createStatus: 'Создать статус',
+          edit: 'Изменить',
+          deleteStatus: 'Удалить',
+          submitCreate: 'Создать',
+          submitEdit: 'Изменить',
+        },
+        new: {
+          header: 'Создание статуса',
+        },
+        editPage: {
+          header: 'Изменить статус',
         },
       },
       session: {
         new: {
           signIn: 'Вход',
           submit: 'Войти',
+          email: 'Email',
+          password: 'Пароль',
         },
       },
       users: {
         header: 'Пользователи',
-        id: 'ID',
-        email: 'Email',
-        createdAt: 'Дата создания',
+        labels: {
+          id: 'ID',
+          name: 'Полное имя',
+          email: 'Email',
+          createdAt: 'Дата создания',
+          actions: 'Действия',
+          password: 'Пароль',
+          firstName: 'Имя',
+          lastName: 'Фамилия',
+          edit: 'Изменить',
+          delete: 'Удалить',
+          submitRegister: 'Сохранить',
+          submitEdit: 'Изменить',
+        },
         new: {
-          submit: 'Сохранить',
-          signUp: 'Регистрация',
+          header: 'Регистрация',
+        },
+        editPage: {
+          header: 'Изменить пользователя',
         },
       },
       welcome: {

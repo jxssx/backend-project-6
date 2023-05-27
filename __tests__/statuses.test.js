@@ -4,13 +4,14 @@ import _ from 'lodash';
 import fastify from 'fastify';
 
 import init from '../server/plugin.js';
-import { getTestData, prepareData } from './helpers/index.js';
+import { getTestData, prepareData, makeLogin } from './helpers/index.js';
 
 describe('test statuses CRUD', () => {
   let app;
   let knex;
   let models;
   const testData = getTestData();
+  let cookie;
 
   beforeAll(async () => {
     app = fastify({
@@ -30,21 +31,37 @@ describe('test statuses CRUD', () => {
   });
 
   beforeEach(async () => {
+    cookie = await makeLogin(app, testData.users.existing);
   });
 
   it('index', async () => {
     const response = await app.inject({
       method: 'GET',
       url: app.reverse('statuses'),
+      cookies: cookie,
     });
 
-    expect(response.statusCode).toBe(302);
+    expect(response.statusCode).toBe(200);
+  });
+
+  it('certain status', async () => {
+    const params = testData.statuses.existing;
+    const status = await models.status.query().findOne({ name: params.name });
+
+    const response = await app.inject({
+      method: 'GET',
+      url: app.reverse('statuses', { id: status.id }),
+      cookies: cookie,
+    });
+
+    expect(response.statusCode).toBe(200);
   });
 
   it('new', async () => {
     const response = await app.inject({
       method: 'GET',
       url: app.reverse('newStatus'),
+      cookies: cookie,
     });
 
     expect(response.statusCode).toBe(200);
@@ -58,11 +75,47 @@ describe('test statuses CRUD', () => {
       payload: {
         data: params,
       },
+      cookies: cookie,
     });
 
     expect(response.statusCode).toBe(302);
     const status = await models.status.query().findOne({ name: params.name });
     expect(status).toMatchObject(params);
+  });
+
+  it('delete', async () => {
+    const params = testData.statuses.delete;
+    const status = await models.status.query().findOne({ name: params.name });
+    const response = await app.inject({
+      method: 'DELETE',
+      url: app.reverse('deleteStatus', { id: status.id }),
+      payload: {
+        data: params,
+      },
+      cookies: cookie,
+    });
+
+    expect(response.statusCode).toBe(302);
+    const deletedStatus = await models.status.query().findOne({ name: params.name });
+    expect(deletedStatus).toBeUndefined();
+  });
+
+  it('update', async () => {
+    const params = testData.statuses.update.from;
+    const status = await models.status.query().findOne({ name: params.name });
+    const updatedStatus = testData.statuses.update.to;
+    const response = await app.inject({
+      method: 'PATCH',
+      url: app.reverse('updateStatus', { id: status.id }),
+      payload: {
+        data: updatedStatus,
+      },
+      cookies: cookie,
+    });
+
+    expect(response.statusCode).toBe(302);
+
+    expect(await models.status.query().findOne(updatedStatus)).toMatchObject(updatedStatus);
   });
 
   afterEach(async () => {

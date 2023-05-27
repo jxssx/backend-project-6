@@ -17,8 +17,23 @@ module.exports = class User extends unique(BaseModel) {
       required: ['email', 'password'],
       properties: {
         id: { type: 'integer' },
+        firstName: { type: 'string', minLength: 1 },
+        lastName: { type: 'string', minLength: 1 },
         email: { type: 'string', minLength: 1 },
         password: { type: 'string', minLength: 3 },
+      },
+    };
+  }
+
+  static get relationMappings() {
+    return {
+      tasks: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: 'Task.cjs',
+        join: {
+          from: 'users.id',
+          to: 'tasks.authorId',
+        },
       },
     };
   }

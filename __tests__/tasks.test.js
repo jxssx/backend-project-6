@@ -1,11 +1,12 @@
 // @ts-check
 
+import _ from 'lodash';
 import fastify from 'fastify';
 
 import init from '../server/plugin.js';
 import { getTestData, prepareData, makeLogin } from './helpers/index.js';
 
-describe('test statuses CRUD', () => {
+describe('test tasks CRUD', () => {
   let app;
   let knex;
   let models;
@@ -36,20 +37,20 @@ describe('test statuses CRUD', () => {
   it('index', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('statuses'),
+      url: app.reverse('tasks'),
       cookies: cookie,
     });
 
     expect(response.statusCode).toBe(200);
   });
 
-  it('certain status', async () => {
-    const params = testData.statuses.existing.update;
-    const status = await models.status.query().findOne({ name: params.name });
+  it('certain task', async () => {
+    const params = testData.tasks.existing.update;
+    const task = await models.task.query().findOne({ name: params.name });
 
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('statuses', { id: status.id }),
+      url: app.reverse('tasks', { id: task.id }),
       cookies: cookie,
     });
 
@@ -59,7 +60,7 @@ describe('test statuses CRUD', () => {
   it('new', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('newStatus'),
+      url: app.reverse('newTask'),
       cookies: cookie,
     });
 
@@ -67,10 +68,10 @@ describe('test statuses CRUD', () => {
   });
 
   it('create', async () => {
-    const params = testData.statuses.new;
+    const params = testData.tasks.new;
     const response = await app.inject({
       method: 'POST',
-      url: app.reverse('createStatus'),
+      url: app.reverse('createTask'),
       payload: {
         data: params,
       },
@@ -78,16 +79,16 @@ describe('test statuses CRUD', () => {
     });
 
     expect(response.statusCode).toBe(302);
-    const status = await models.status.query().findOne({ name: params.name });
-    expect(status).toMatchObject(params);
+    const task = await models.task.query().findOne({ name: params.name });
+    expect(task).toMatchObject(params);
   });
 
   it('delete', async () => {
-    const params = testData.statuses.existing.delete;
-    const status = await models.status.query().findOne({ name: params.name });
+    const params = testData.tasks.existing.delete;
+    const task = await models.task.query().findOne({ name: params.name });
     const response = await app.inject({
       method: 'DELETE',
-      url: app.reverse('deleteStatus', { id: status.id }),
+      url: app.reverse('deleteTask', { id: task.id }),
       payload: {
         data: params,
       },
@@ -95,27 +96,30 @@ describe('test statuses CRUD', () => {
     });
 
     expect(response.statusCode).toBe(302);
-    const deletedStatus = await models.status.query().findOne({ name: params.name });
-    expect(deletedStatus).toBeUndefined();
+    const deletedTask = await models.task.query().findOne({ name: params.name });
+    expect(deletedTask).toBeUndefined();
   });
 
   it('update', async () => {
-    const params = testData.statuses.existing.update;
-    const status = await models.status.query().findOne({ name: params.name });
-    const updatedStatusName = 'updated';
+    const params = testData.tasks.existing.update;
+    const task = await models.task.query().findOne({ name: params.name });
+    const updatedTaskName = 'updated';
     const response = await app.inject({
       method: 'PATCH',
-      url: app.reverse('updateStatus', { id: status.id }),
+      url: app.reverse('updateTask', { id: task.id }),
       payload: {
-        data: { name: updatedStatusName },
+        data: {
+          ...params,
+          name: updatedTaskName,
+        },
       },
       cookies: cookie,
     });
 
     expect(response.statusCode).toBe(302);
 
-    const updatedStatus = await status.$query();
-    expect(updatedStatus.name).toEqual(updatedStatusName);
+    const updatedTask = await task.$query();
+    expect(updatedTask.name).toEqual(updatedTaskName);
   });
 
   afterEach(async () => {

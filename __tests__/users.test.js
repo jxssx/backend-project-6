@@ -11,7 +11,7 @@ describe('test users CRUD', () => {
   let app;
   let knex;
   let models;
-  const testData = getTestData();
+  let testData;
 
   beforeAll(async () => {
     app = fastify({
@@ -27,7 +27,7 @@ describe('test users CRUD', () => {
     // перед каждым тестом выполняем миграции
     // и заполняем БД тестовыми данными
     await knex.migrate.latest();
-    await prepareData(app);
+    testData = await prepareData(app);
   });
 
   beforeEach(async () => {

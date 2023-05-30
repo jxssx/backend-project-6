@@ -17,8 +17,7 @@ describe('test session', () => {
     await init(app);
     knex = app.objection.knex;
     await knex.migrate.latest();
-    await prepareData(app);
-    testData = getTestData();
+    testData = await prepareData(app);
   });
 
   it('test sign in / sign out', async () => {
@@ -33,7 +32,7 @@ describe('test session', () => {
       method: 'POST',
       url: app.reverse('session'),
       payload: {
-        data: testData.users.existing,
+        data: testData.users.existing.author,
       },
     });
 

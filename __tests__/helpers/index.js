@@ -3,6 +3,7 @@
 import { URL } from 'url';
 import fs from 'fs';
 import path from 'path';
+import { generateUsers, generateStatuses, generateTasks } from './faker.js';
 
 // TODO: использовать для фикстур https://github.com/viglucci/simple-knex-fixtures
 
@@ -10,14 +11,31 @@ const getFixturePath = (filename) => path.join('..', '..', '__fixtures__', filen
 const readFixture = (filename) => fs.readFileSync(new URL(getFixturePath(filename), import.meta.url), 'utf-8').trim();
 const getFixtureData = (filename) => JSON.parse(readFixture(filename));
 
-export const getTestData = () => getFixtureData('testData.json');
+export const getTestData = () => ({
+  users: generateUsers(),
+  statuses: generateStatuses(),
+  tasks: generateTasks(),
+});
 
 export const prepareData = async (app) => {
   const { knex } = app.objection;
 
-  // получаем данные из фикстур и заполняем БД
-  await knex('users').insert(getFixtureData('users.json'));
-  await knex('statuses').insert(getFixtureData('statuses.json'));
+  const usersData = generateUsers();
+  const statusesData = generateStatuses();
+
+  await knex('users').insert(usersData.seeds);
+  await knex('statuses').insert(statusesData.seeds);
+  const users = await knex('users');
+  const statuses = await knex('statuses');
+  const tasksData = generateTasks(users, statuses);
+
+  await knex('tasks').insert(tasksData.seeds);
+
+  return {
+    users: usersData,
+    statuses: statusesData,
+    tasks: tasksData,
+  };
 };
 
 export const makeLogin = async (app, userData) => {

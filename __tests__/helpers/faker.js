@@ -41,7 +41,7 @@ const generateUsers = () => {
     existing: {
       author: users[0],
       executor: users[1],
-      forDelete: users[2],
+      delete: users[2],
     },
     seeds,
   };

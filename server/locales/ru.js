@@ -70,15 +70,33 @@ export default {
         signUp: 'Регистрация',
         signOut: 'Выход',
         tasks: 'Задачи',
+        labels: 'Метки',
       },
     },
     views: {
+      labels: {
+        header: 'Метки',
+        entities: {
+          createLabel: 'Создать метку',
+          id: 'ID',
+          name: 'Наименование',
+          createdAt: 'Дата создания',
+          submitCreate: 'Создать',
+          submitEdit: 'Изменить',
+        },
+        new: {
+          header: 'Создние метки',
+        },
+        editPage: {
+          header: 'Изменение метки',
+        },
+      },
       tasks: {
         header: 'Задачи',
         new: {
-          header: 'Создание статуса',
+          header: 'Создание задачи',
         },
-        labels: {
+        entities: {
           name: 'Наименование',
           createTask: 'Создать задачу',
           id: 'ID',
@@ -90,15 +108,16 @@ export default {
           delete: 'Удалить',
           submitCreate: 'Создать',
           description: 'Описание',
+          labels: 'Метки',
         },
         editPage: {
-          header: 'Изменить задачу',
+          header: 'Изменение задачи',
         },
       },
       statuses: {
         header: 'Статусы',
         edit: 'Изменить',
-        labels: {
+        entities: {
           id: 'ID',
           name: 'Наименование',
           createdAt: 'Дата создания',
@@ -112,7 +131,7 @@ export default {
           header: 'Создание статуса',
         },
         editPage: {
-          header: 'Изменить статус',
+          header: 'Изменение статуса',
         },
       },
       session: {
@@ -125,7 +144,7 @@ export default {
       },
       users: {
         header: 'Пользователи',
-        labels: {
+        entities: {
           id: 'ID',
           name: 'Полное имя',
           email: 'Email',
@@ -143,7 +162,7 @@ export default {
           header: 'Регистрация',
         },
         editPage: {
-          header: 'Изменить пользователя',
+          header: 'Изменение пользователя',
         },
       },
       welcome: {

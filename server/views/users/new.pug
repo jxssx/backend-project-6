@@ -12,8 +12,8 @@ block content
             img.rounded-circle(src=assetPath('images/avatar.jpg'))
           .col-12.col-md-6.mt-3.mt-mb-0
             +formFor()(action=route('users') method='post')
-              +floatingFormInput(user, 'firstName', errors, t('views.users.labels.firstName'))(type="text")
-              +floatingFormInput(user, 'lastName', errors, t('views.users.labels.lastName'))(type="text")
-              +floatingFormInput(user, 'email', errors, t('views.users.labels.email'))(type="text")
-              +floatingFormInput(user, 'password', errors, t('views.users.labels.password'))(type="password")
-              +submit(user)(value=t('views.users.labels.submitRegister'))
+              +floatingFormInput(user, 'firstName', errors, t('views.users.entities.firstName'))(type="text")
+              +floatingFormInput(user, 'lastName', errors, t('views.users.entities.lastName'))(type="text")
+              +floatingFormInput(user, 'email', errors, t('views.users.entities.email'))(type="text")
+              +floatingFormInput(user, 'password', errors, t('views.users.entities.password'))(type="password")
+              +submit(user)(value=t('views.users.entities.submitRegister'))

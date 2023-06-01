@@ -3,10 +3,11 @@ extends ../layouts/application.pug
 block content
   h1.display-4.fw-bold.mt-4= t('views.tasks.new.header')
   +formFor()(action=route('createTask') method='post')
-    +floatingFormInput(task, 'name', errors, t('views.tasks.labels.name'))(type="text")
+    +floatingFormInput(task, 'name', errors, t('views.tasks.entities.name'))(type="text")
     .mb-3
-      label(for='data_description')= t('views.tasks.labels.description')
+      label(for='data_description')= t('views.tasks.entities.description')
       textarea.form-control(id='data_description' name='data[description]' rows='3')
-    +select(task, 'statusId', errors, statuses, t('views.tasks.labels.status'))
-    +select(task, 'executorId', errors, users, t('views.tasks.labels.executor'))
-    +submit(task)(value=t('views.tasks.labels.submitCreate'))
+    +select(task, 'statusId', errors, statuses, t('views.tasks.entities.status'))
+    +select(task, 'executorId', errors, users, t('views.tasks.entities.executor'))
+    +select(task, 'labels', errors, labels, t('views.tasks.entities.labels'), true)
+    +submit(task)(value=t('views.tasks.entities.submitCreate'))

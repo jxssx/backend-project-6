@@ -1,0 +1,8 @@
+extends ../layouts/application.pug
+
+block content
+  h1.display-4.fw-bold.mt-4= t('views.labels.editPage.header')
+  +formFor()(action=`/labels/${label.id}` method='post')
+    +floatingFormInput(label, 'name', errors, t('views.labels.entities.name'))(type="text")
+    input(name="_method" type="hidden" value="patch")
+    +submit(status)(value=t('views.labels.entities.submitEdit'))

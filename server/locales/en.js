@@ -4,6 +4,20 @@ export default {
   translation: {
     appName: 'Task Manager',
     flash: {
+      labels: {
+        create: {
+          success: 'Label has been successfully created',
+          error: 'An error occured while trying to create the label',
+        },
+        update: {
+          success: 'Label has been successfully updated',
+          error: 'An error occured while trying to update the label',
+        },
+        delete: {
+          success: 'Label has been successfully deleted',
+          error: 'An error occured while trying to delete the label',
+        },
+      },
       tasks: {
         create: {
           success: 'Task has been successfully created',
@@ -70,15 +84,35 @@ export default {
         signUp: 'Register',
         signOut: 'Logout',
         tasks: 'Tasks',
+        labels: 'Labels',
       },
     },
     views: {
+      labels: {
+        header: 'Labels',
+        entities: {
+          createLabel: 'Create label',
+          id: 'ID',
+          name: 'Name',
+          createdAt: 'Created at',
+          submitCreate: 'Submit',
+          edit: 'Edit',
+          delete: 'Delete',
+          submitEdit: 'Submit',
+        },
+        new: {
+          header: 'Create label',
+        },
+        editPage: {
+          header: 'Edit label',
+        },
+      },
       tasks: {
         header: 'Tasks',
         new: {
           header: 'Task creation',
         },
-        labels: {
+        entities: {
           name: 'Name',
           createTask: 'Create task',
           id: 'ID',
@@ -91,6 +125,7 @@ export default {
           submitCreate: 'Submit',
           submitEdit: 'Submit',
           description: 'Description',
+          labels: 'Labels',
         },
         editPage: {
           header: 'Edit task',
@@ -98,7 +133,7 @@ export default {
       },
       statuses: {
         header: 'Statuses',
-        labels: {
+        entities: {
           id: 'ID',
           name: 'Name',
           createdAt: 'Created at',
@@ -125,7 +160,7 @@ export default {
       },
       users: {
         header: 'Users',
-        labels: {
+        entities: {
           id: 'ID',
           name: 'Name',
           email: 'Email',

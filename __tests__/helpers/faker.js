@@ -63,7 +63,7 @@ const generateStatuses = () => {
   };
 };
 
-generateLabels = () => {
+const generateLabels = () => {
   const newLabel = generateData('label', 1);
   const labels = generateData('label', 2);
   return {
@@ -76,9 +76,10 @@ generateLabels = () => {
   };
 };
 
-const generateTasks = (users, statuses) => {
+const generateTasks = (users, statuses, labels) => {
   const [author, executor] = users;
   const [status] = statuses;
+  const [label]
 
   const formTask = (task) => ({
     ...task,
@@ -101,5 +102,5 @@ const generateTasks = (users, statuses) => {
 };
 
 export {
-  generateUsers, generateStatuses, generateTasks,
+  generateUsers, generateStatuses, generateTasks, generateLabels,
 };

@@ -3,18 +3,15 @@
 import { URL } from 'url';
 import fs from 'fs';
 import path from 'path';
-import { generateUsers, generateStatuses, generateTasks } from './faker.js';
+import { generateUsers, generateStatuses, generateTasks, generateLabels } from './faker.js';
 
 // TODO: использовать для фикстур https://github.com/viglucci/simple-knex-fixtures
-
-const getFixturePath = (filename) => path.join('..', '..', '__fixtures__', filename);
-const readFixture = (filename) => fs.readFileSync(new URL(getFixturePath(filename), import.meta.url), 'utf-8').trim();
-const getFixtureData = (filename) => JSON.parse(readFixture(filename));
 
 export const getTestData = () => ({
   users: generateUsers(),
   statuses: generateStatuses(),
   tasks: generateTasks(),
+  labels: generateLabels(),
 });
 
 export const prepareData = async (app) => {
@@ -22,9 +19,11 @@ export const prepareData = async (app) => {
 
   const usersData = generateUsers();
   const statusesData = generateStatuses();
+  const labelsData = generateLabels();
 
   await knex('users').insert(usersData.seeds);
   await knex('statuses').insert(statusesData.seeds);
+  await knex('labels').insert(labelsData.seeds);
   const users = await knex('users');
   const statuses = await knex('statuses');
   const tasksData = generateTasks(users, statuses);
@@ -35,6 +34,7 @@ export const prepareData = async (app) => {
     users: usersData,
     statuses: statusesData,
     tasks: tasksData,
+    labels: labelsData,
   };
 };
 

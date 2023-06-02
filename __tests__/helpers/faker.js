@@ -76,10 +76,9 @@ const generateLabels = () => {
   };
 };
 
-const generateTasks = (users, statuses, labels) => {
+const generateTasks = (users, statuses) => {
   const [author, executor] = users;
   const [status] = statuses;
-  const [label]
 
   const formTask = (task) => ({
     ...task,

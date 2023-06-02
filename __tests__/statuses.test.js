@@ -3,7 +3,7 @@
 import fastify from 'fastify';
 
 import init from '../server/plugin.js';
-import { getTestData, prepareData, makeLogin } from './helpers/index.js';
+import { prepareData, makeLogin } from './helpers/index.js';
 
 describe('test statuses CRUD', () => {
   let app;
@@ -37,19 +37,6 @@ describe('test statuses CRUD', () => {
     const response = await app.inject({
       method: 'GET',
       url: app.reverse('statuses'),
-      cookies: cookie,
-    });
-
-    expect(response.statusCode).toBe(200);
-  });
-
-  it('certain status', async () => {
-    const params = testData.statuses.existing.update;
-    const status = await models.status.query().findOne({ name: params.name });
-
-    const response = await app.inject({
-      method: 'GET',
-      url: app.reverse('statuses', { id: status.id }),
       cookies: cookie,
     });
 

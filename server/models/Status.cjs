@@ -27,12 +27,8 @@ module.exports = class Status extends unique(BaseModel) {
         relation: BaseModel.HasManyRelation,
         modelClass: 'Task.cjs',
         join: {
-          from: 'tasks.id',
-          through: {
-            from: 'statuses.id',
-            to: 'tasks.statusId',
-          },
-          to: 'labels.id',
+          from: 'statuses.id',
+          to: 'tasks.statusId',
         },
       },
     };

@@ -1,12 +1,11 @@
 // @ts-check
 
-import _ from 'lodash';
 import fastify from 'fastify';
 
 import init from '../server/plugin.js';
 import { prepareData, makeLogin } from './helpers/index.js';
 
-describe('test tasks CRUD', () => {
+describe('test labels CRUD', () => {
   let app;
   let knex;
   let models;
@@ -37,20 +36,7 @@ describe('test tasks CRUD', () => {
   it('index', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('tasks'),
-      cookies: cookie,
-    });
-
-    expect(response.statusCode).toBe(200);
-  });
-
-  it('certain task', async () => {
-    const params = testData.tasks.existing.update;
-    const task = await models.task.query().findOne({ name: params.name });
-
-    const response = await app.inject({
-      method: 'GET',
-      url: app.reverse('tasks', { id: task.id }),
+      url: app.reverse('labels'),
       cookies: cookie,
     });
 
@@ -60,7 +46,7 @@ describe('test tasks CRUD', () => {
   it('new', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('newTask'),
+      url: app.reverse('newLabel'),
       cookies: cookie,
     });
 
@@ -68,10 +54,10 @@ describe('test tasks CRUD', () => {
   });
 
   it('create', async () => {
-    const params = testData.tasks.new;
+    const params = testData.labels.new;
     const response = await app.inject({
       method: 'POST',
-      url: app.reverse('createTask'),
+      url: app.reverse('createLabel'),
       payload: {
         data: params,
       },
@@ -79,16 +65,16 @@ describe('test tasks CRUD', () => {
     });
 
     expect(response.statusCode).toBe(302);
-    const task = await models.task.query().findOne({ name: params.name });
-    expect(task).toMatchObject(params);
+    const label = await models.label.query().findOne({ name: params.name });
+    expect(label).toMatchObject(params);
   });
 
   it('delete', async () => {
-    const params = testData.tasks.existing.delete;
-    const task = await models.task.query().findOne({ name: params.name });
+    const params = testData.labels.existing.delete;
+    const label = await models.label.query().findOne({ name: params.name });
     const response = await app.inject({
       method: 'DELETE',
-      url: app.reverse('deleteTask', { id: task.id }),
+      url: app.reverse('deleteLabel', { id: label.id }),
       payload: {
         data: params,
       },
@@ -96,30 +82,27 @@ describe('test tasks CRUD', () => {
     });
 
     expect(response.statusCode).toBe(302);
-    const deletedTask = await models.task.query().findOne({ name: params.name });
-    expect(deletedTask).toBeUndefined();
+    const deletedLabel = await models.label.query().findOne({ name: params.name });
+    expect(deletedLabel).toBeUndefined();
   });
 
   it('update', async () => {
-    const params = testData.tasks.existing.update;
-    const task = await models.task.query().findOne({ name: params.name });
-    const updatedTaskName = 'updated';
+    const params = testData.labels.existing.update;
+    const label = await models.label.query().findOne({ name: params.name });
+    const updatedLabelName = 'updated';
     const response = await app.inject({
       method: 'PATCH',
-      url: app.reverse('updateTask', { id: task.id }),
+      url: app.reverse('updateLabel', { id: label.id }),
       payload: {
-        data: {
-          ...params,
-          name: updatedTaskName,
-        },
+        data: { name: updatedLabelName },
       },
       cookies: cookie,
     });
 
     expect(response.statusCode).toBe(302);
 
-    const updatedTask = await task.$query();
-    expect(updatedTask.name).toEqual(updatedTaskName);
+    const updatedLabel = await label.$query();
+    expect(updatedLabel.name).toEqual(updatedLabelName);
   });
 
   afterEach(async () => {

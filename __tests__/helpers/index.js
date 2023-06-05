@@ -1,9 +1,8 @@
 // @ts-check
 
-import { URL } from 'url';
-import fs from 'fs';
-import path from 'path';
-import { generateUsers, generateStatuses, generateTasks, generateLabels } from './faker.js';
+import {
+  generateUsers, generateStatuses, generateTasks, generateLabels,
+} from './faker.js';
 
 // TODO: использовать для фикстур https://github.com/viglucci/simple-knex-fixtures
 

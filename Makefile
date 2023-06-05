@@ -26,3 +26,6 @@ lint:
 
 test:
 	npm test -s
+
+dependency:
+  npm ci

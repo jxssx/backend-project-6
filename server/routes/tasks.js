@@ -3,13 +3,32 @@ import i18next from 'i18next';
 export default (app) => {
   app
     .get('/tasks', { name: 'tasks', preValidation: app.authenticate }, async (req, reply) => {
+      const { id: authorId } = req.user;
+      const { query } = req;
+      const {
+        status, executor, label, isUserCreator,
+      } = query;
       const taskQuery = app.objection.models.task.query().withGraphJoined('[status, author, executor, labels]');
-      const [tasks, statuses, users] = await Promise.all([
+      taskQuery.modify('filterStatus', status || undefined);
+      taskQuery.modify('filterExecutor', executor || undefined);
+      taskQuery.modify('filterLabel', label || undefined);
+      if (isUserCreator === 'on') {
+        taskQuery.modify('filterAuthor', authorId || undefined);
+      }
+
+      const [tasks, statuses, users, labels] = await Promise.all([
         taskQuery,
         app.objection.models.status.query(),
         app.objection.models.user.query(),
+        app.objection.models.label.query(),
       ]);
-      reply.render('tasks/index', { tasks, statuses, users });
+      reply.render('tasks/index', {
+        tasks,
+        statuses,
+        users,
+        labels,
+        query,
+      });
       return reply;
     })
     .get('/tasks/new', { name: 'newTask', preValidation: app.authenticate }, async (req, reply) => {
@@ -19,7 +38,9 @@ export default (app) => {
         await app.objection.models.user.query(),
         await app.objection.models.label.query(),
       ]);
-      reply.render('tasks/new', { task, statuses, users, labels });
+      reply.render('tasks/new', {
+        task, statuses, users, labels,
+      });
       return reply;
     })
     .post('/tasks', { name: 'createTask', preValidation: app.authenticate }, async (req, reply) => {

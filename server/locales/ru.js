@@ -95,6 +95,8 @@ export default {
         header: 'Задачи',
         new: {
           header: 'Создание задачи',
+          isUserCreator: 'Только мои задачи',
+          submitFilter: 'Показать',
         },
         entities: {
           name: 'Наименование',
@@ -109,6 +111,7 @@ export default {
           submitCreate: 'Создать',
           description: 'Описание',
           labels: 'Метки',
+          label: 'Метка',
         },
         editPage: {
           header: 'Изменение задачи',

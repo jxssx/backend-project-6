@@ -77,3 +77,24 @@ mixin select(entity, propertyName, errors = {}, items, label, isMultiple = false
           option(value= item.id selected= isSelected)= item.name
     if !_.isEmpty(propertyErrors)
       .invalid-feedback= propertyErrors.map(({ message }) => message).join('. ')
+
+mixin filterSelect(propertyName, items=[], labelName, query)
+  - inputId = getInputId(propertyName)
+  .input-group.mb-3
+    label.input-group-text(for=inputId)= labelName
+    select.form-select(id=inputId name=propertyName)
+      option
+      each item in items
+        - isSelected = query[propertyName] == item.id
+        if propertyName !== 'executor'
+          option(value=item.id selected= isSelected)= item.name
+        else
+           option(value=item.id selected= isSelected)= `${item.firstName} ${item.lastName}`
+
+mixin checkBox(propertyName, labelName, query)
+  - inputId = getInputId(propertyName)
+  - isChecked = query[propertyName] === 'on'
+  .mb-3.form-check
+    input.form-check-input(id=inputId type='checkbox' name=propertyName checked= isChecked)
+    label.form-check-label(for=inputId)= labelName
+    

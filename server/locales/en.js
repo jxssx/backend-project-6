@@ -109,6 +109,8 @@ export default {
       },
       tasks: {
         header: 'Tasks',
+        isUserCreator: 'Only my tasks',
+        submitFilter: 'Show',
         new: {
           header: 'Task creation',
         },
@@ -126,6 +128,7 @@ export default {
           submitEdit: 'Submit',
           description: 'Description',
           labels: 'Labels',
+          label: 'Label',
         },
         editPage: {
           header: 'Edit task',

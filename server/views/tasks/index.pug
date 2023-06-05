@@ -2,7 +2,22 @@ extends ../layouts/application.pug
 
 block content
   h1.display-4.fw-bold.mt-4= t('views.tasks.header')
-  a.btn.btn-primary(href='tasks/new')= t('views.tasks.entities.createTask')
+  a.btn.btn-primary.mb-5(href='tasks/new')= t('views.tasks.entities.createTask')
+  .card.shadow-sm
+    .card-body.p-4
+      form(action='/tasks' method='get')
+        .row
+          .col-12.col-md
+            +filterSelect('status', statuses, t('views.tasks.entities.status'), query)
+          .col-12.col-md
+            +filterSelect('executor', users, t('views.tasks.entities.executor'), query)
+          .col-12.col-md
+            +filterSelect('label', labels, t('views.tasks.entities.label'), query)
+        +checkBox('isUserCreator', t('views.tasks.isUserCreator'), query)
+        input.btn.btn-primary(type='submit' value= t('views.tasks.submitFilter'))
+            
+          
+          
   .table-responsive
     table.table.table-borderless.table-striped.mt-5
       thead

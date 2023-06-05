@@ -10,6 +10,21 @@ module.exports = class Task extends unique(BaseModel) {
     return 'tasks';
   }
 
+  static modifiers = {
+    filterStatus(query, statusId) {
+      query.skipUndefined().where('statusId', statusId);
+    },
+    filterExecutor(query, executorId) {
+      query.skipUndefined().where('executorId', executorId);
+    },
+    filterLabel(query, labelId) {
+      query.skipUndefined().where('labels.id', labelId);
+    },
+    filterAuthor(query, authorId) {
+      query.skipUndefined().where('authorId', authorId);
+    },
+  };
+
   static get jsonSchema() {
     return {
       type: 'object',

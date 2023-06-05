@@ -1,6 +1,8 @@
 # fastify-nodejs-application
 
 [![Node CI](https://github.com/hexlet-boilerplates/fastify-nodejs-application/workflows/Node%20CI/badge.svg)](https://github.com/hexlet-boilerplates/fastify-nodejs-application/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f5e4c75c1cdabb40ab00/maintainability)](https://codeclimate.com/github/jxssx/backend-project-6/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f5e4c75c1cdabb40ab00/test_coverage)](https://codeclimate.com/github/jxssx/backend-project-6/test_coverage)
 
 ## Setup
 

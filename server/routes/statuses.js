@@ -1,6 +1,7 @@
 // @ts-check
 
 import i18next from 'i18next';
+import Rollbar from 'rollbar';
 
 export default (app) => {
   app

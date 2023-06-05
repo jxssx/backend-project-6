@@ -16,6 +16,7 @@ import fastifyObjectionjs from 'fastify-objectionjs';
 import qs from 'qs';
 import Pug from 'pug';
 import i18next from 'i18next';
+import Rollbar from 'rollbar';
 
 import ru from './locales/ru.js';
 import en from './locales/en.js';
@@ -30,6 +31,20 @@ const __dirname = fileURLToPath(path.dirname(import.meta.url));
 
 const mode = process.env.NODE_ENV || 'development';
 // const isDevelopment = mode === 'development';
+
+const setErrorHandler = (app) => {
+  const rollbar = new Rollbar({
+    accessToken: process.env.ROLLBAR_KEY,
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+  });
+
+  app.setErrorHandler((error) => {
+    rollbar.error(error);
+  });
+
+  return app;
+};
 
 const setUpViews = (app) => {
   const helpers = getHelpers(app);
@@ -126,6 +141,7 @@ export default async (app, _options) => {
   await setupLocalization();
   setUpViews(app);
   setUpStaticAssets(app);
+  setErrorHandler(app);
   addRoutes(app);
   addHooks(app);
 

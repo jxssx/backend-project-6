@@ -28,4 +28,4 @@ test:
 	npm test -s
 
 dependency:
-  npm ci
+	npm ci

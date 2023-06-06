@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: make dependency
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v2.7.5
       env:

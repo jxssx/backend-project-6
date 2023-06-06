@@ -30,5 +30,5 @@ test:
 dependency:
 	npm ci
 
-test_coverage:
+test-coverage:
 	npm test -s -- --coverage --coverageProvider=v8

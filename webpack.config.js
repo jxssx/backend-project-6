@@ -19,7 +19,7 @@ export default {
           name: '[name].[ext]',
           outputPath: 'assets/images',
         },
-      }
+      },
     ],
   },
   plugins: [new MiniCssExtractPlugin()],

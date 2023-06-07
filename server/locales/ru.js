@@ -17,6 +17,7 @@ export default {
           success: 'Метка успешно удалена',
           error: 'Не удалось изменить метку',
         },
+      },
       tasks: {
         create: {
           success: 'Задача успешно создана',

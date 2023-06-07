@@ -4,6 +4,19 @@ export default {
   translation: {
     appName: 'Менеджер задач',
     flash: {
+      labels: {
+        create: {
+          success: 'Метка успешно создана',
+          error: 'Не удалось создать метку',
+        },
+        update: {
+          success: 'Метка успешно изменена',
+          error: 'Не удалось изменить метку',
+        },
+        delete: {
+          success: 'Метка успешно удалена',
+          error: 'Не удалось изменить метку',
+        },
       tasks: {
         create: {
           success: 'Задача успешно создана',
@@ -11,22 +24,22 @@ export default {
         },
         delete: {
           success: 'Задача успешно удалена',
-          error: 'Возникла ошибка при попытке удалить статус',
+          error: 'Не удалось удалить задачу',
           noAccess: 'Задачу может удалить только ее автор',
         },
         update: {
           success: 'Задача успешно изменена',
-          error: 'Ошибка при изменении задачи',
+          error: 'Не удалось изменить задачу',
         },
       },
       statuses: {
         create: {
           success: 'Статус успешно создан',
-          error: 'Ошибка при создании статуса',
+          error: 'Не удалось создать статус',
         },
         update: {
           success: 'Статус успешно изменен',
-          error: 'Ошибка при изменении статуса',
+          error: 'Не удалось изменить статус',
         },
         delete: {
           success: 'Статус успешно удален',
@@ -78,6 +91,8 @@ export default {
         header: 'Метки',
         entities: {
           createLabel: 'Создать метку',
+          edit: 'Изменить',
+          delete: 'Удалить',
           id: 'ID',
           name: 'Наименование',
           createdAt: 'Дата создания',
@@ -93,6 +108,8 @@ export default {
       },
       tasks: {
         header: 'Задачи',
+        isUserCreator: 'Только мои задачи',
+        submitFilter: 'Показать',
         new: {
           header: 'Создание задачи',
           isUserCreator: 'Только мои задачи',
@@ -105,6 +122,7 @@ export default {
           author: 'Автор',
           status: 'Статус',
           executor: 'Исполнитель',
+          edit: 'Изменить',
           createdAt: 'Дата создания',
           submitEdit: 'Изменить',
           delete: 'Удалить',

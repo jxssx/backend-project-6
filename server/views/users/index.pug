@@ -6,11 +6,11 @@ block content
     table.table.table-borderless.table-striped.mt-5
       thead
         tr
-          th= t('views.users.entities.id')
-          th= t('views.users.entities.name')
-          th= t('views.users.entities.email')
-          th= t('views.users.entities.createdAt')
-          th= t('views.users.entities.actions')
+          th= t('views.users.id')
+          th= t('views.users.name')
+          th= t('views.users.email')
+          th= t('views.users.createdAt')
+          th= t('views.users.actions')
       tbody
         each user in users
           tr
@@ -20,7 +20,7 @@ block content
             td= formatDate(user.createdAt)
             td
               div.d-flex
-                a.btn.btn-primary.me-1(href=`/users/${user.id}/edit`)= t('views.users.entities.edit')
+                a.btn.btn-primary.me-1(href=`/users/${user.id}/edit`)= t('views.users.edit')
                 form(action=`/users/${user.id}`, method='post')
                   input(name='_method', type='hidden', value='delete')
-                  input(class='btn btn-danger' type='submit' value=t('views.users.entities.delete'))
+                  input(class='btn btn-danger' type='submit' value=t('views.users.delete'))

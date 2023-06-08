@@ -11,19 +11,19 @@ block content
         each label in task.labels
           span.me-1.badge.bg-info.text-white= label.name
       .d-flex.flex-wrap.mb-3
-        span.text-muted.me-2= t('views.tasks.entities.author')
+        span.text-muted.me-2= t('views.tasks.task.author')
         span= `${task.author.firstName} ${task.author.lastName}`
       .d-flex.flex-wrap.mb-3
-        span.text-muted.me-2= t('views.tasks.entities.executor')
+        span.text-muted.me-2= t('views.tasks.task.executor')
         if task.executor
           span= `${task.executor.firstName} ${task.executor.lastName}`
         else
           span= ''
       .d-flex.flex-wrap.mb-3
-        span.text-muted.me-2= t('views.tasks.entities.createdAt')
+        span.text-muted.me-2= t('views.tasks.task.createdAt')
         span= formatDate(task.createdAt)
       .d-flex.flex-wrap
-        a.btn.btn-primary.me-1(href=`/tasks/${task.id}/edit`)= t('views.tasks.entities.edit')
+        a.btn.btn-primary.me-1(href=`/tasks/${task.id}/edit`)= t('views.tasks.task.edit')
         form(action=`/tasks/${task.id}`, method='post')
           input(name='_method', type='hidden', value='delete')
-          input(class='btn btn-danger' type='submit' value=t('views.tasks.entities.delete'))
+          input(class='btn btn-danger' type='submit' value=t('views.tasks.task.delete'))

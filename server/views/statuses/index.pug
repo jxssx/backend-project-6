@@ -2,14 +2,14 @@ extends ../layouts/application.pug
 
 block content
   h1.display-4.fw-bold.mt-4= t('views.statuses.header')
-  a.btn.btn-primary(href='statuses/new')= t('views.statuses.entities.createStatus')
+  a.btn.btn-primary(href='statuses/new')= t('views.statuses.createStatus')
   .table-responsive  
     table.table.table-borderless.table-striped.mt-5
       thead
         tr
-          th= t('views.statuses.entities.id')
-          th= t('views.statuses.entities.name')
-          th= t('views.statuses.entities.createdAt')
+          th= t('views.statuses.id')
+          th= t('views.statuses.name')
+          th= t('views.statuses.createdAt')
       tbody
         each status in statuses
           tr
@@ -18,7 +18,7 @@ block content
             td= formatDate(status.createdAt)
             td
               div.d-flex
-                a.btn.btn-primary.me-1(href=`/statuses/${status.id}/edit`)= t('views.statuses.entities.edit')
+                a.btn.btn-primary.me-1(href=`/statuses/${status.id}/edit`)= t('views.statuses.edit')
                 form(action=`/statuses/${status.id}`, method='post')
                   input(name='_method', type='hidden', value='delete')
-                  input(class='btn btn-danger' type='submit' value=t('views.statuses.entities.deleteStatus'))
+                  input(class='btn btn-danger' type='submit' value=t('views.statuses.delete'))

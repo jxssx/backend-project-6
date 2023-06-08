@@ -2,17 +2,17 @@ extends ../layouts/application.pug
 
 block content
   h1.display-4.fw-bold.mt-4= t('views.tasks.header')
-  a.btn.btn-primary.mb-5(href='tasks/new')= t('views.tasks.entities.createTask')
+  a.btn.btn-primary.mb-5(href='tasks/new')= t('views.tasks.createTask')
   .card.shadow-sm
     .card-body.p-4
       form(action='/tasks' method='get')
         .row
           .col-12.col-md
-            +filterSelect('status', statuses, t('views.tasks.entities.status'), query)
+            +filterSelect('status', statuses, t('views.tasks.status'), query)
           .col-12.col-md
-            +filterSelect('executor', users, t('views.tasks.entities.executor'), query)
+            +filterSelect('executor', users, t('views.tasks.executor'), query)
           .col-12.col-md
-            +filterSelect('label', labels, t('views.tasks.entities.label'), query)
+            +filterSelect('label', labels, t('views.tasks.label'), query)
         +checkBox('isUserCreator', t('views.tasks.isUserCreator'), query)
         input.btn.btn-primary(type='submit' value= t('views.tasks.submitFilter'))
             
@@ -22,12 +22,12 @@ block content
     table.table.table-borderless.table-striped.mt-5
       thead
         tr
-          th= t('views.tasks.entities.id')
-          th= t('views.tasks.entities.name')
-          th= t('views.tasks.entities.status')
-          th= t('views.tasks.entities.author')
-          th= t('views.tasks.entities.executor')
-          th= t('views.tasks.entities.createdAt')
+          th= t('views.tasks.id')
+          th= t('views.tasks.name')
+          th= t('views.tasks.status')
+          th= t('views.tasks.author')
+          th= t('views.tasks.executor')
+          th= t('views.tasks.createdAt')
       tbody
         each task in tasks
           tr
@@ -43,7 +43,7 @@ block content
             td= formatDate(task.createdAt)
             td
               div.d-flex
-                a.btn.btn-primary.me-1(href=`/tasks/${task.id}/edit`)= t('views.tasks.entities.edit')
+                a.btn.btn-primary.me-1(href=`/tasks/${task.id}/edit`)= t('views.tasks.edit')
                 form(action=`/tasks/${task.id}`, method='post')
                   input(name='_method', type='hidden', value='delete')
-                  input(class='btn btn-danger' type='submit' value=t('views.tasks.entities.delete'))
+                  input(class='btn btn-danger' type='submit' value=t('views.tasks.delete'))

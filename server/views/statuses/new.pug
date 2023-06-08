@@ -3,5 +3,5 @@ extends ../layouts/application.pug
 block content
   h1.display-4.fw-bold.mt-4= t('views.statuses.new.header')
   +formFor()(action=route('createStatus') method='post')
-    +floatingFormInput(status, 'name', errors, 'Name')(type="text")
+    +floatingFormInput(status, 'name', errors, t('views.statuses.entities.name'))(type="text")
     +submit(status)(value=t('views.statuses.entities.submitCreate'))
